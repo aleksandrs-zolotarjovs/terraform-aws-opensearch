@@ -428,11 +428,6 @@ data "aws_iam_policy_document" "cloudwatch" {
     # resources = coalescelist([for log in aws_cloudwatch_log_group.this : "${log.arn}:*"], ["arn:${local.partition}:logs:*"])
     resources = ["arn:${local.partition}:logs:*"]
 
-    principals {
-      identifiers = ["es.amazonaws.com"]
-      type        = "Service"
-    }
-
     condition {
       test     = "StringEquals"
       variable = "aws:SourceAccount"
