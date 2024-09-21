@@ -409,18 +409,6 @@ data "aws_iam_policy_document" "cloudwatch" {
     # https://github.com/hashicorp/terraform-provider-aws/issues/14497
     # resources = coalescelist([for log in aws_cloudwatch_log_group.this : "${log.arn}:*"], ["arn:${local.partition}:logs:*"])
     resources = ["arn:${local.partition}:logs:*"]
-
-    condition {
-      test     = "StringEquals"
-      variable = "aws:SourceAccount"
-      values   = [local.account_id]
-    }
-
-    condition {
-      test     = "ArnLike"
-      variable = "aws:SourceArn"
-      values   = [local.static_domain_arn]
-    }
   }
 }
 
