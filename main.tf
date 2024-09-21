@@ -292,15 +292,6 @@ data "aws_iam_policy_document" "this" {
       )
       not_resources = try(statement.value.not_resources, null)
 
-      dynamic "principals" {
-        for_each = try(statement.value.principals, [])
-
-        content {
-          type        = principals.value.type
-          identifiers = principals.value.identifiers
-        }
-      }
-
       dynamic "not_principals" {
         for_each = try(statement.value.not_principals, [])
 
